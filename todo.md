@@ -1,0 +1,23 @@
+# Project TODO
+
+- [x] Establish the Data Buddy mascot-led visual system with Archivo Black display type, a restrained Playwrite accent, monochrome tokens, and spacious Notion-inspired layout rules.
+- [x] Build a responsive persistent dashboard shell with sidebar navigation, workspace controls, a soft-divider content area, and keyboard-accessible navigation.
+- [x] Create the mascot-centered onboarding, empty, loading, and success states with reduced-motion support.
+- [x] Implement the overview dashboard with data-quality score, recent datasets, issue summaries, an approachable AI prompt entry point, and an upload drop zone.
+- [x] Implement a dataset profiling view that summarizes schema, row and column counts, nulls, duplicate records, type mismatches, and detected anomalies.
+- [x] Implement a controlled cleaning workspace that previews missing-value, duplicate, formatting, and type-fix suggestions before applying them.
+- [x] Connect the Ask Data Buddy control to a server-side AI planning procedure that sends profile metadata rather than raw data and returns review-first cleaning guidance.
+- [x] Implement a column analysis view with statistics, unique and null counts, distributions, and minimal accessible charts.
+- [x] Implement an AI-ready documentation view that produces a readable data dictionary and quality report with copy and download controls.
+- [x] Add coherent micro-interactions, short page transitions, staggered reveals, responsive layouts, focus states, and toast feedback for prototype actions.
+- [x] Add and run Vitest coverage for product data helpers and key interaction logic.
+- [x] Add a first-run mascot-led onboarding flow that makes the welcome state distinct from the logged-in workspace.
+- [x] Add an interactive CSV/XLSX drop zone and session-backed recent dataset list to the overview.
+- [x] Add separately previewable deterministic missingness-flag and numeric-type conversion actions alongside formatting and duplicate cleanup.
+- [x] Replace all remaining no-op controls with navigation or descriptive feedback and cover assistant planning helpers with Vitest.
+- [x] Run type checks, verify the rendered desktop and mobile views, and save a completion checkpoint.
+- [x] Add deterministic Vitest coverage for imported-row normalization and the controlled cleaning actions that power upload and selection flows.
+- [x] Extract and test the upload-session and selected-cleaning-action mappings used by the Home interaction handlers.
+- [ ] Write a non-technical Markdown guide explaining every Data Buddy screen, button, workflow, and privacy boundary.
+- [ ] Configure Git commit attribution to the authenticated user, create a private GitHub repository, and push the Data Buddy MVP.
+- [ ] Verify the private repository contents and deliver the guide and repository link.
