@@ -18,6 +18,20 @@
 - [x] Run type checks, verify the rendered desktop and mobile views, and save a completion checkpoint.
 - [x] Add deterministic Vitest coverage for imported-row normalization and the controlled cleaning actions that power upload and selection flows.
 - [x] Extract and test the upload-session and selected-cleaning-action mappings used by the Home interaction handlers.
-- [ ] Write a non-technical Markdown guide explaining every Data Buddy screen, button, workflow, and privacy boundary.
-- [ ] Configure Git commit attribution to the authenticated user, create a private GitHub repository, and push the Data Buddy MVP.
-- [ ] Verify the private repository contents and deliver the guide and repository link.
+- [x] Define the evidence-first audit domain model with deterministic rule IDs, severity tiers, evidence rows, repair proposals, and error-ledger entries.
+- [x] Upgrade file intake to analyze CSV, Excel, and JSON files with transparent constraints, safe parsing, and clear unsupported-input states.
+- [x] Implement row-level evidence for type violations, missingness, duplicate records, range violations, format violations, cardinality anomalies, and robust outlier checks.
+- [x] Build an evidence-first audit dashboard that prioritizes blocking findings, displays severity rationale, and lets users inspect exact affected rows.
+- [x] Implement reversible remediation previews for safe type coercion, missingness flags, duplicate handling, range treatment, and row exclusion without mutating the source data.
+- [x] Persist audit report metadata and findings for authenticated users, including report status, evidence ledger, and remediation history.
+- [x] Add downloadable audit reports and error ledgers, plus clearer onboarding that demonstrates the ten-second evidence workflow.
+- [x] Add adversarial-input handling, deterministic rule tests, remediation reversibility tests, and responsive audit-workflow verification.
+- [x] Add a deterministic safe preview for range-violation findings with a row-level ledger and no source mutation.
+- [x] Persist an explicit audit report status and surface the status in saved report history.
+- [x] Update the non-technical user guide for the evidence screen, row-level proof, range-review previews, JSON support, save-audit history, and original-snapshot restore flow.
+- [x] Deliver an in-chat Data Buddy mascot animation and micro-interaction playbook without modifying project files.
+- [x] Analyze the supplied animation reference and provide a Data Buddy-specific adaptation recommendation in chat without modifying the application.
+- [x] Integrate the supplied terminal-glasses loading mascot into real file upload and audit-progress states with truthful staged status text.
+- [x] Add accessible reduced-motion behavior and tests for the loading-stage mapping without changing the evidence-first source-data safeguards.
+- [ ] Commit and push the latest mascot-loading Data Buddy version to the existing private GitHub repository under the authenticated user's GitHub identity.
+- [ ] Verify the private repository contains the new user-attributed commit and report the update.

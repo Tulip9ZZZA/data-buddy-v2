@@ -1,0 +1,1 @@
+ALTER TABLE `auditReports` ADD `status` enum('draft','saved','reviewed') DEFAULT 'saved' NOT NULL;

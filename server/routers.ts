@@ -1,9 +1,11 @@
 import { COOKIE_NAME } from "@shared/const";
+import { nanoid } from "nanoid";
 import { z } from "zod";
+import * as db from "./db";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { invokeLLM } from "./_core/llm";
 import { systemRouter } from "./_core/systemRouter";
-import { publicProcedure, router } from "./_core/trpc";
+import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
 
 const assistantInput = z.object({
   goal: z.string().trim().min(3).max(500),
@@ -31,6 +33,43 @@ const assistantPlanSchema = z.object({
     risk: z.enum(["safe", "review"]),
   })).min(2).max(4),
   caution: z.string().max(300),
+});
+
+const persistedEvidence = z.object({
+  rowNumber: z.number().int().positive(),
+  column: z.string().max(255).optional(),
+  value: z.string().max(1000),
+  message: z.string().max(1000),
+});
+
+const persistedAuditInput = z.object({
+  datasetName: z.string().trim().min(1).max(255),
+  sourceFormat: z.enum(["csv", "excel", "json", "example", "unknown"]),
+  rowCount: z.number().int().nonnegative(),
+  columnCount: z.number().int().nonnegative(),
+  completeness: z.number().int().min(0).max(100),
+  counts: z.object({ blocker: z.number().int().nonnegative(), review: z.number().int().nonnegative(), info: z.number().int().nonnegative() }),
+  findings: z.array(z.object({
+    id: z.string().max(200),
+    severity: z.enum(["blocker", "review", "info"]),
+    title: z.string().max(255),
+    description: z.string().max(2000),
+    column: z.string().max(255).optional(),
+    affectedCount: z.number().int().nonnegative(),
+    evidence: z.array(persistedEvidence).max(10),
+    repair: z.string().max(64).optional(),
+  })).max(120),
+  remediation: z.object({
+    action: z.string().max(64),
+    ledger: z.array(z.object({
+      rowNumber: z.number().int().positive(),
+      column: z.string().max(255).optional(),
+      status: z.enum(["changed", "skipped", "excluded"]),
+      before: z.string().max(1000),
+      after: z.string().max(1000),
+      reason: z.string().max(1000),
+    })).max(500),
+  }).optional(),
 });
 
 export function createAssistantFallback(input: z.infer<typeof assistantInput>) {
@@ -116,6 +155,39 @@ export const appRouter = router({
         return fallback;
       }
     }),
+  }),
+
+  audit: router({
+    save: protectedProcedure.input(persistedAuditInput).mutation(async ({ ctx, input }) => {
+      const reportId = nanoid(20);
+      await db.saveAuditReport({
+        id: reportId,
+        userId: ctx.user.id,
+        datasetName: input.datasetName,
+        sourceFormat: input.sourceFormat,
+        rowCount: input.rowCount,
+        columnCount: input.columnCount,
+        completeness: input.completeness,
+        status: "saved",
+        blockerCount: input.counts.blocker,
+        reviewCount: input.counts.review,
+        infoCount: input.counts.info,
+        findings: input.findings.map(finding => ({
+          id: nanoid(24),
+          ruleId: finding.id,
+          severity: finding.severity,
+          title: finding.title,
+          description: finding.description,
+          columnName: finding.column,
+          affectedCount: finding.affectedCount,
+          evidenceJson: JSON.stringify(finding.evidence),
+          remediationAction: finding.repair,
+        })),
+        remediation: input.remediation ? { id: nanoid(24), action: input.remediation.action, ledgerJson: JSON.stringify(input.remediation.ledger) } : undefined,
+      });
+      return { id: reportId };
+    }),
+    recent: protectedProcedure.query(({ ctx }) => db.listAuditReports(ctx.user.id)),
   }),
 
   // TODO: add feature routers here, e.g.

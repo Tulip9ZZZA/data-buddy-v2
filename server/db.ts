@@ -1,6 +1,6 @@
-import { eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import { drizzle } from "drizzle-orm/mysql2";
-import { InsertUser, users } from "../drizzle/schema";
+import { auditFindings, auditRemediations, auditReports, InsertUser, users } from "../drizzle/schema";
 import { ENV } from './_core/env';
 
 let _db: ReturnType<typeof drizzle> | null = null;
@@ -89,4 +89,79 @@ export async function getUserByOpenId(openId: string) {
   return result.length > 0 ? result[0] : undefined;
 }
 
-// TODO: add feature queries here as your schema grows.
+export type StoredFindingInput = {
+  id: string;
+  ruleId: string;
+  severity: "blocker" | "review" | "info";
+  title: string;
+  description: string;
+  columnName?: string;
+  affectedCount: number;
+  evidenceJson: string;
+  remediationAction?: string;
+};
+
+export type StoredAuditInput = {
+  id: string;
+  userId: number;
+  datasetName: string;
+  sourceFormat: string;
+  rowCount: number;
+  columnCount: number;
+  completeness: number;
+  status: "draft" | "saved" | "reviewed";
+  blockerCount: number;
+  reviewCount: number;
+  infoCount: number;
+  findings: StoredFindingInput[];
+  remediation?: { id: string; action: string; ledgerJson: string };
+};
+
+export async function saveAuditReport(input: StoredAuditInput) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is unavailable. Try saving the audit again shortly.");
+  await db.transaction(async tx => {
+    await tx.insert(auditReports).values({
+      id: input.id,
+      userId: input.userId,
+      datasetName: input.datasetName,
+      sourceFormat: input.sourceFormat,
+      rowCount: input.rowCount,
+      columnCount: input.columnCount,
+      completeness: input.completeness,
+      status: input.status,
+      blockerCount: input.blockerCount,
+      reviewCount: input.reviewCount,
+      infoCount: input.infoCount,
+    });
+    if (input.findings.length) {
+      await tx.insert(auditFindings).values(input.findings.map(finding => ({
+        id: finding.id,
+        reportId: input.id,
+        ruleId: finding.ruleId,
+        severity: finding.severity,
+        title: finding.title,
+        description: finding.description,
+        columnName: finding.columnName ?? null,
+        affectedCount: finding.affectedCount,
+        evidenceJson: finding.evidenceJson,
+        remediationAction: finding.remediationAction ?? null,
+      })));
+    }
+    if (input.remediation) {
+      await tx.insert(auditRemediations).values({
+        id: input.remediation.id,
+        reportId: input.id,
+        action: input.remediation.action,
+        ledgerJson: input.remediation.ledgerJson,
+      });
+    }
+  });
+  return { id: input.id };
+}
+
+export async function listAuditReports(userId: number) {
+  const db = await getDb();
+  if (!db) return [];
+  return db.select().from(auditReports).where(eq(auditReports.userId, userId)).orderBy(desc(auditReports.createdAt)).limit(20);
+}
