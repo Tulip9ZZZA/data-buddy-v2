@@ -1,0 +1,38 @@
+{
+  "accessDate": "2026-11-11",
+  "note": "Public datasets used for ground-truth labeling and false-positive-rate measurement. sha256 recorded at access time by scripts/fetch_datasets.py; re-verify with `sha256sum benchmarks/datasets/*.csv`.",
+  "datasets": [
+    {
+      "name": "titanic",
+      "file": "titanic.csv",
+      "url": "https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv",
+      "sourcePage": "https://www.kaggle.com/c/titanic/data (public mirror maintained by Data Science Dojo)",
+      "license": "Public domain (passenger manifest data); mirror shared for education",
+      "rows": 891,
+      "columns": 12,
+      "sha256": "4a437fde05fe5264e1701a7387ac6fb75393772ba38bb2c9c566405af5af4bd7"
+    },
+    {
+      "name": "adult",
+      "file": "adult.csv",
+      "url": "https://archive.ics.uci.edu/ml/machine-learning-databases/adult/adult.data",
+      "sourcePage": "https://archive.ics.uci.edu/dataset/2/adult",
+      "license": "CC BY 4.0 (UCI Machine Learning Repository donation)",
+      "rows": 32561,
+      "columns": 15,
+      "sha256": "5b00264637dbfec36bdeaab5676b0b309ff9eb788d63554ca0a249491c86603d",
+      "note": "Headerless in original distribution; Data Buddy intake names columns via the documented headerless path."
+    },
+    {
+      "name": "usgs_earthquakes_month",
+      "file": "usgs_earthquakes_month.csv",
+      "url": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.csv",
+      "sourcePage": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/csv.php",
+      "license": "Public domain (U.S. Government work, USGS)",
+      "rows": 9826,
+      "columns": 22,
+      "sha256": "871239448b5ae8e83924ef05b7a47ef95e6f7af80d28539748e0bc451b1eba31",
+      "note": "Rolling 30-day feed; content changes daily by design. sha256 records the exact snapshot used for the published RESULTS.md."
+    }
+  ]
+}

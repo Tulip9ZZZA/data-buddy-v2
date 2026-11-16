@@ -1,0 +1,14 @@
+# AUDIT.FORMAT.VARIATION — text that changes under the deterministic normalizer
+id: AUDIT.FORMAT.VARIATION
+name: format-variation
+version: 2.0.0
+title: "{column} has formatting variation"
+description: >
+  Reports text values that would change under the documented reversible
+  normalization policy (trim; emails also lowercased). Informational: the
+  source is not wrong, the values are just not canonical yet.
+defaultSeverity: info
+repair: normalize-formatting
+tags: [format]
+evidenceLimit: 10
+evidenceFields: [rowNumber, column, value, message]

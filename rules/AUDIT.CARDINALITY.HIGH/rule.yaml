@@ -1,0 +1,14 @@
+# AUDIT.CARDINALITY.HIGH — a "category" column that is nearly unique
+id: AUDIT.CARDINALITY.HIGH
+name: cardinality-anomaly
+version: 2.0.0
+title: "{column} is nearly unique"
+description: >
+  For text columns with ≥12 non-blank values and >97% distinct values that do
+  not look like identifiers (id, name, email, ticket, code), asks the user to
+  confirm whether the field is a category or an identifier.
+defaultSeverity: info
+repair: null
+tags: [structure]
+evidenceLimit: 10
+evidenceFields: [rowNumber, column, value, message]

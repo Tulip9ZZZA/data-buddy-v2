@@ -1,0 +1,15 @@
+# AUDIT.MISSING.VALUES — blank or placeholder values in a column
+id: AUDIT.MISSING.VALUES
+name: missing-values
+version: 2.0.0
+title: "{column} has missing values"
+description: >
+  Counts blank cells and placeholder strings (null, n/a, na, none, -) per column
+  and reports the exact source rows. Severity escalates to blocker when the
+  column name matches a critical field (id, age, target, outcome, label,
+  amount, fare, value).
+defaultSeverity: review
+repair: flag-missing
+tags: [completeness]
+evidenceLimit: 10
+evidenceFields: [rowNumber, column, value, message]

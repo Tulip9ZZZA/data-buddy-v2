@@ -1,0 +1,13 @@
+name,email,city
+" Ada Lovelace ",ada@example.com,Bristol
+" Grace Hopper",grace@example.com,"New York"
+edmond@example.com,edmond@example.com,leeds
+"Jean Bartik ",jean@example.com,"  "
+,,
+"Pam Grier",PAM@EXAMPLE.COM,leeds
+sam@example.com,sam@example.com,Bristol
+kim@example.com,kim@example.com,Bristol
+lee@example.com,lee@example.com,Bristol
+wu@example.com,wu@example.com,Bristol
+zoe@example.com,zoe@example.com,Bristol
+ana@example.com,ana@example.com,Bristol

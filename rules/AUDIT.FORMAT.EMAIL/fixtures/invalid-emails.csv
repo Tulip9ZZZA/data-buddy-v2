@@ -1,0 +1,10 @@
+contact_email,note
+"ADA@Example.com ",ok
+not-an-email,ok
+bea@example.com,ok
+"  dee@example.com",ok
+,ok
+eli@example.com,ok
+fin@example.com,ok
+gia@example.com,ok
+hal@example.com,ok

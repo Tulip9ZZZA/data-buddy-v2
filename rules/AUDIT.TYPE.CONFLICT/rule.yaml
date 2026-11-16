@@ -1,0 +1,14 @@
+# AUDIT.TYPE.CONFLICT — text values in a mostly-numeric column
+id: AUDIT.TYPE.CONFLICT
+name: type-conflict
+version: 2.0.0
+title: "{column} mixes numeric and text values"
+description: >
+  When at least 80% of a column's non-blank values parse as numbers, the
+  remaining text values are reported with their exact source rows so they can
+  be corrected or explicitly accepted before analysis.
+defaultSeverity: review
+repair: coerce-number
+tags: [types]
+evidenceLimit: 10
+evidenceFields: [rowNumber, column, value, message]

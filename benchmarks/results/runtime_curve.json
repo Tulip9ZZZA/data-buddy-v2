@@ -1,0 +1,43 @@
+{
+  "measuredAt": "2026-11-11",
+  "node": "v24.22.2",
+  "rowsPerSecondNote": "auditMs excludes parse/normalise; totalMs includes them. 10k/100k from bench_engine.mjs (3072MB heap); larger sizes from bench_single.mjs probes (3584MB).",
+  "runs": [
+    {
+      "rows": 10000,
+      "columns": 8,
+      "fileSizeBytes": 654148,
+      "parseMs": 308,
+      "normaliseMs": 43,
+      "auditMs": 219,
+      "totalMs": 570,
+      "peakRssMb": 166,
+      "findings": 8,
+      "counts": {
+        "blocker": 3,
+        "review": 3,
+        "info": 2
+      },
+      "verdict": "blocked",
+      "sampled": false
+    },
+    {
+      "rows": 100000,
+      "columns": 8,
+      "fileSizeBytes": 6745468,
+      "parseMs": 3750,
+      "normaliseMs": 379,
+      "auditMs": 3216,
+      "totalMs": 7346,
+      "peakRssMb": 489,
+      "findings": 8,
+      "counts": {
+        "blocker": 3,
+        "review": 3,
+        "info": 2
+      },
+      "verdict": "blocked",
+      "sampled": false
+    }
+  ]
+}

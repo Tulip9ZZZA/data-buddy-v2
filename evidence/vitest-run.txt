@@ -1,0 +1,32 @@
+
+ RUN  v2.1.9 /home/z/my-project/data-buddy
+
+ ✓ tests/adversarial/adversarial.test.ts (16 tests) 6824ms
+   ✓ ADV-02: row bombs are bounded or safely rejected > rejects files above the 10M-row hard limit with a SafeRejection 1128ms
+   ✓ ADV-02: row bombs are bounded or safely rejected > runs sampled duplicate detection above the 2M dedupe limit (bounded work) 5656ms
+ ✓ engine/runAudit.test.ts (10 tests) 7176ms
+   ✓ intake guards (adversarial defense) > runs the full registry over 2,000,001 duplicate rows without exploding memory (sampled mode) 7151ms
+ ✓ client/src/lib/auditEngine.test.ts (4 tests) 16ms
+ ✓ engine/remediation.test.ts (5 tests) 40ms
+ ✓ client/src/lib/dataBuddy.test.ts (6 tests) 36ms
+ ✓ rules/AUDIT.MISSING.VALUES/test_rule.test.ts (3 tests) 4ms
+ ✓ rules/AUDIT.RANGE.BOUNDS/test_rule.test.ts (4 tests) 5ms
+ ✓ rules/AUDIT.FORMAT.VARIATION/test_rule.test.ts (3 tests) 4ms
+ ✓ server/auth.logout.test.ts (1 test) 4ms
+ ✓ rules/AUDIT.CARDINALITY.HIGH/test_rule.test.ts (3 tests) 3ms
+ ✓ rules/AUDIT.OUTLIER.IQR/test_rule.test.ts (3 tests) 3ms
+ ✓ rules/AUDIT.TYPE.CONFLICT/test_rule.test.ts (3 tests) 4ms
+ ✓ rules/AUDIT.UNTRUSTED.CELL/test_rule.test.ts (3 tests) 3ms
+ ✓ engine/fixtureLoader.test.ts (7 tests) 4ms
+ ✓ rules/AUDIT.DUPLICATE.EXACT/test_rule.test.ts (3 tests) 11ms
+ ✓ rules/AUDIT.COLUMN.CONSTANT/test_rule.test.ts (3 tests) 3ms
+ ✓ rules/AUDIT.FORMAT.EMAIL/test_rule.test.ts (3 tests) 4ms
+ ✓ client/src/lib/workspaceActions.test.ts (2 tests) 11ms
+ ✓ server/assistant.plan.test.ts (1 test) 2ms
+ ✓ client/src/lib/loadingStages.test.ts (2 tests) 3ms
+
+ Test Files  20 passed (20)
+      Tests  85 passed (85)
+   Start at  14:23:44
+   Duration  21.68s (transform 392ms, setup 0ms, collect 2.97s, tests 14.16s, environment 3ms, prepare 1.45s)
+

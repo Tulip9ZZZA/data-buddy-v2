@@ -1,0 +1,16 @@
+# AUDIT.UNTRUSTED.CELL — instruction-like text found in data cells
+id: AUDIT.UNTRUSTED.CELL
+name: untrusted-cell
+version: 2.0.0
+title: Instruction-like cell content requires review
+description: >
+  Flags cells that look like instructions aimed at an AI system ("ignore
+  previous instructions", "system prompt", "delete all"). Data Buddy treats
+  cell text as DATA ONLY: it is never executed, never forwarded to a model,
+  and never allowed to alter audit policy. This finding exists so a human
+  sees the hostile content, not because the engine acted on it.
+defaultSeverity: blocker
+repair: null
+tags: [security]
+evidenceLimit: 10
+evidenceFields: [rowNumber, column, value, message]

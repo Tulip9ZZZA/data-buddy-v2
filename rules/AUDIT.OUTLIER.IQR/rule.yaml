@@ -1,0 +1,16 @@
+# AUDIT.OUTLIER.IQR — values outside 1.5×IQR fences (review signal only)
+id: AUDIT.OUTLIER.IQR
+name: iqr-outlier
+version: 2.0.0
+title: "{column} has IQR outliers"
+description: >
+  Tukey fences at 1.5×IQR for numeric columns. Eligibility: at least 8 finite
+  numeric values, more than 10 distinct values (IQR is meaningless on discrete
+  counts like Parch/SibSp), and a non-identifier name (Ticket/…/code columns
+  are skipped). Explicitly a review signal, not proof of an error; the repair
+  is a preview-only winsorization.
+defaultSeverity: review
+repair: winsorize-iqr
+tags: [distribution]
+evidenceLimit: 10
+evidenceFields: [rowNumber, column, value, message]

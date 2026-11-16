@@ -1,0 +1,20 @@
+# LiteLLM gateway config — deploy-time artifact (see security/costs.md).
+# Provider credentials come from environment variables at deploy; nothing here
+# is a secret and nothing here is read by the product in v2 (no model calls in
+# the audit path). Shipped so the first staging deploy cannot overspend.
+
+model_list:
+  - model_name: plan-only
+    litellm_params:
+      model: openai/SET_AT_DEPLOY
+      api_key: os.environ/PROVIDER_API_KEY
+
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+
+litellm_settings:
+  max_budget: 10.0 # USD hard ceiling per virtual key
+  budget_duration: 30d
+  num_max_parallel_requests: 4
+  rpm_limit_per_key: 10
+  tpm_limit_per_key: 20000

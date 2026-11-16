@@ -1,0 +1,15 @@
+# AUDIT.RANGE.BOUNDS — values outside documented review ranges
+id: AUDIT.RANGE.BOUNDS
+name: range-violation
+version: 2.0.0
+title: "{column} has range violations"
+description: >
+  Name-based range review: /age/i columns must sit in 0–120; /fare|price|
+  amount|count|quantity|orders/i columns must be non-negative. Values are
+  flagged, never replaced — the repair adds a review column and keeps the
+  original value untouched.
+defaultSeverity: review
+repair: flag-range
+tags: [validity]
+evidenceLimit: 10
+evidenceFields: [rowNumber, column, value, message]

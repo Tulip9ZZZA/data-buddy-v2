@@ -1,0 +1,31 @@
+{
+  "measuredAt": "2026-11-11T14:30:27",
+  "method": "median of 3 runs after 1 warm-up; identical pipeline per engine",
+  "crossoverRows": 10000,
+  "runs": [
+    {
+      "rows": 10000,
+      "pandasMs": 31,
+      "polarsMs": 7,
+      "winner": "polars"
+    },
+    {
+      "rows": 100000,
+      "pandasMs": 524,
+      "polarsMs": 104,
+      "winner": "polars"
+    },
+    {
+      "rows": 500000,
+      "pandasMs": 2776,
+      "polarsMs": 629,
+      "winner": "polars"
+    },
+    {
+      "rows": 1000000,
+      "pandasMs": 6289,
+      "polarsMs": 567,
+      "winner": "polars"
+    }
+  ]
+}

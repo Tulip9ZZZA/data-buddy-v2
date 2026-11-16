@@ -1,0 +1,22 @@
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Packages: +20
+++++++++++++++++++++
+Progress: resolved 62, reused 3, downloaded 22, added 20, done
+file:///home/z/.cache/pnpm/dlx/9c9c3a723b01022dba1b01b7ce1ab63a901ae75092ce5ab270877118b19bf542/1a1cb28752a-2cb2/node_modules/.pnpm/oxc-parser@0.156.0/node_modules/oxc-parser/src-js/raw-transfer/common.js:294
+  const arrayBuffer = new ArrayBuffer(ARRAY_BUFFER_SIZE);
+                      ^
+
+RangeError: Array buffer allocation failed
+    at new ArrayBuffer (<anonymous>)
+    at createBuffer (file:///home/z/.cache/pnpm/dlx/9c9c3a723b01022dba1b01b7ce1ab63a901ae75092ce5ab270877118b19bf542/1a1cb28752a-2cb2/node_modules/.pnpm/oxc-parser@0.156.0/node_modules/oxc-parser/src-js/raw-transfer/common.js:294:23)
+    at prepareRaw (file:///home/z/.cache/pnpm/dlx/9c9c3a723b01022dba1b01b7ce1ab63a901ae75092ce5ab270877118b19bf542/1a1cb28752a-2cb2/node_modules/.pnpm/oxc-parser@0.156.0/node_modules/oxc-parser/src-js/raw-transfer/common.js:208:55)
+    at parseSyncRawImpl (file:///home/z/.cache/pnpm/dlx/9c9c3a723b01022dba1b01b7ce1ab63a901ae75092ce5ab270877118b19bf542/1a1cb28752a-2cb2/node_modules/.pnpm/oxc-parser@0.156.0/node_modules/oxc-parser/src-js/raw-transfer/common.js:42:53)
+    at parseSyncRaw (file:///home/z/.cache/pnpm/dlx/9c9c3a723b01022dba1b01b7ce1ab63a901ae75092ce5ab270877118b19bf542/1a1cb28752a-2cb2/node_modules/.pnpm/oxc-parser@0.156.0/node_modules/oxc-parser/src-js/raw-transfer/eager.js:16:10)
+    at parseSync (file:///home/z/.cache/pnpm/dlx/9c9c3a723b01022dba1b01b7ce1ab63a901ae75092ce5ab270877118b19bf542/1a1cb28752a-2cb2/node_modules/.pnpm/oxc-parser@0.156.0/node_modules/oxc-parser/src-js/index.js:60:12)
+    at parseFile (file:///home/z/.cache/pnpm/dlx/9c9c3a723b01022dba1b01b7ce1ab63a901ae75092ce5ab270877118b19bf542/1a1cb28752a-2cb2/node_modules/.pnpm/knip@6.45.1/node_modules/knip/dist/typescript/ast-nodes.js:13:12)
+    at runPlugin (file:///home/z/.cache/pnpm/dlx/9c9c3a723b01022dba1b01b7ce1ab63a901ae75092ce5ab270877118b19bf542/1a1cb28752a-2cb2/node_modules/.pnpm/knip@6.45.1/node_modules/knip/dist/WorkspaceWorker.js:370:47)
+    at async WorkspaceWorker.runPlugins (file:///home/z/.cache/pnpm/dlx/9c9c3a723b01022dba1b01b7ce1ab63a901ae75092ce5ab270877118b19bf542/1a1cb28752a-2cb2/node_modules/.pnpm/knip@6.45.1/node_modules/knip/dist/WorkspaceWorker.js:460:33)
+    at async build (file:///home/z/.cache/pnpm/dlx/9c9c3a723b01022dba1b01b7ce1ab63a901ae75092ce5ab270877118b19bf542/1a1cb28752a-2cb2/node_modules/.pnpm/knip@6.45.1/node_modules/knip/dist/graph/build.js:198:35)
+
+Node.js v24.22.2
+KNIP_EXIT:1

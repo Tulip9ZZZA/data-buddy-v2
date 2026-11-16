@@ -1,0 +1,75 @@
+{
+  "measuredAt": "2026-11-11T14:45:09.116Z",
+  "groundTruthRows": 200,
+  "perFamily": {
+    "missing": {
+      "tp": 65,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    "duplicate": {
+      "tp": 15,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    "type_conflict": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "precision": null,
+      "recall": null,
+      "f1": null
+    },
+    "range": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 0,
+      "precision": null,
+      "recall": null,
+      "f1": null
+    },
+    "format": {
+      "tp": 85,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    },
+    "outlier": {
+      "tp": 69,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1,
+      "recall": 1,
+      "f1": 1
+    }
+  },
+  "falsePositiveRatePerDataset": {
+    "titanic": {
+      "rows": 891,
+      "labeledRows": 75,
+      "cleanRowsFlagged": 0,
+      "falsePositiveRate": 0
+    },
+    "adult": {
+      "rows": 32562,
+      "labeledRows": 85,
+      "cleanRowsFlagged": 0,
+      "falsePositiveRate": 0
+    },
+    "usgs": {
+      "rows": 9826,
+      "labeledRows": 40,
+      "cleanRowsFlagged": 0,
+      "falsePositiveRate": 0
+    }
+  },
+  "methodNote": "Engine rules run with evidenceLimit raised (registry clone) so recall is not capped by the 10-row UI evidence limit. Rows matched to labels by file position (header = row 1)."
+}

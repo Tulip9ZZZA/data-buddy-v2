@@ -1,0 +1,30 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended", ":semanticCommits", "schedule:weekly"],
+  "rangeStrategy": "bump-only",
+  "vulnerabilityAlerts": { "enabled": true, "labels": ["security"] },
+  "osvVulnerabilityAlerts": true,
+  "packageRules": [
+    {
+      "description": "automerge dev-tooling patch/minor; tests must pass first",
+      "matchDepTypes": ["devDependencies"],
+      "matchUpdateTypes": ["patch", "minor"],
+      "automerge": true,
+      "automergeType": "pr",
+      "requiredStatusChecks": ["quality", "e2e"]
+    },
+    {
+      "description": "runtime dependencies always get a reviewed PR",
+      "matchDepTypes": ["dependencies"],
+      "automerge": false,
+      "labels": ["runtime-dep"]
+    },
+    {
+      "description": "security fixes weekly, prioritized",
+      "matchDepTypes": ["dependencies", "devDependencies"],
+      "matchCurrentVersion": "!/^0/",
+      "vulnerabilityFixStrategy": "auto",
+      "labels": ["security"]
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # full history so gitleaks scans everything
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.4.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pnpm install --frozen-lockfile
+      - name: rule contract lint
+        run: pnpm dbuddy rules lint
+      - name: lint + typecheck
+        run: pnpm check
+      - name: vitest (unit + rules + adversarial) with coverage
+        run: pnpm vitest run --coverage
+      - name: python tests (benchmark + dataset integrity)
+        run: |
+          pip install pytest pandas polars scikit-learn
+          pytest tests/python -q
+      - name: coverage gate (engine + rules >= 85%)
+        run: |
+          node -e "
+            const cov = require('./coverage/coverage-summary.json');
+            const lines = cov.total.lines.pct;
+            console.log('coverage:', lines + '%');
+            if (lines < 85) { console.error('coverage gate failed'); process.exit(1); }
+          "
+      - name: build
+        run: pnpm build
+
+  security:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: gitleaks (working tree + history)
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: osv-scanner
+        uses: google/osv-scanner-action/osv-scanner-action@v2
+        with:
+          scan-args: |-
+            --format=table
+            --output=osv-report.txt
+            ./
+      - name: trivy filesystem scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: fs
+          scanners: vuln,secret,misconfig
+          severity: CRITICAL,HIGH
+          exit-code: "1"
+          ignore-unfixed: "true"
+
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10.4.1
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - run: pnpm build
+      - name: golden-path + invalid-input + mobile E2E
+        run: pnpm playwright test
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: playwright-evidence
+          path: tests/e2e/artifacts/

@@ -1,0 +1,27 @@
+{
+  "measuredAt": "2026-11-11T14:47:58",
+  "data": {
+    "dataset": "titanic",
+    "columns": ["Age", "Fare"],
+    "rows": 714
+  },
+  "params": {
+    "n_estimators": 100,
+    "max_samples": 256,
+    "seed": 42,
+    "contamination": 0.05
+  },
+  "sklearn": {
+    "flagged": 35,
+    "elapsedMs": 110
+  },
+  "typescript": {
+    "flagged": 35,
+    "elapsedMs": 34
+  },
+  "parity": {
+    "jaccardTop5pct": 0.8919,
+    "spearmanRankCorrelation": 0.9821
+  },
+  "note": "Jaccard >= 0.7 and rho >= 0.9 are treated as parity for a bounded, single-threaded reimplementation."
+}

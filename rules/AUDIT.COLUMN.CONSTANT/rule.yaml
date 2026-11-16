@@ -1,0 +1,14 @@
+# AUDIT.COLUMN.CONSTANT — a column carrying exactly one distinct value
+id: AUDIT.COLUMN.CONSTANT
+name: constant-column
+version: 2.0.0
+title: "{column} always has the same value"
+description: >
+  Reports text columns with ≥12 non-blank values but only one distinct value.
+  Constant columns carry no signal for analysis and often indicate a bad
+  export filter. Informational: it may be intentional metadata.
+defaultSeverity: info
+repair: null
+tags: [structure]
+evidenceLimit: 10
+evidenceFields: [rowNumber, column, value, message]

@@ -1,0 +1,14 @@
+# AUDIT.FORMAT.EMAIL — values failing a basic email pattern in *email* columns
+id: AUDIT.FORMAT.EMAIL
+name: invalid-email
+version: 2.0.0
+title: "{column} contains invalid email formats"
+description: >
+  Applies only to columns whose name matches /email/i. Reports values that do
+  not match a basic local@domain.tld pattern. A conservative shape check,
+  not a deliverability test.
+defaultSeverity: review
+repair: normalize-formatting
+tags: [format, contact]
+evidenceLimit: 10
+evidenceFields: [rowNumber, column, value, message]

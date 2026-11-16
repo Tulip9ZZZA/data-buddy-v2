@@ -1,0 +1,15 @@
+# Lefthook — pre-commit convenience layer. CI (`.github/workflows/ci.yml`)
+# repeats every check; hooks are convenience, not the control.
+pre-commit:
+  commands:
+    secrets:
+      run: gitleaks protect --staged --redact -v
+      skip:
+        - ref: main # full-history scan runs in CI
+    rules-lint:
+      run: pnpm dbuddy rules lint
+    typecheck:
+      run: pnpm check
+    focused-tests:
+      run: pnpm vitest run engine rules tests/adversarial
+      exclude: "^$" # engine+rules+adversarial run in seconds

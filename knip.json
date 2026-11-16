@@ -1,0 +1,27 @@
+{
+  "$schema": "https://unpkg.com/knip@5/schema.json",
+  "entry": [
+    "client/src/main.tsx",
+    "server/_core/index.ts",
+    "scripts/dbuddy.ts",
+    "benchmarks/scripts/bench_engine.mjs",
+    "benchmarks/scripts/evaluate_ground_truth.mts",
+    "playwright.config.ts",
+    "vitest.config.ts"
+  ],
+  "project": [
+    "client/src/**/*.{ts,tsx}",
+    "engine/**/*.ts",
+    "rules/**/*.ts",
+    "scripts/**/*.ts",
+    "server/**/*.ts"
+  ],
+  "ignore": ["client/src/components/ui/**", "drizzle/**", "attached_assets/**"],
+  "ignoreDependencies": [
+    "eslint",
+    "prettier",
+    "tailwindcss-animate",
+    "junitreport"
+  ],
+  "include": ["dependencies", "exports", "files"]
+}

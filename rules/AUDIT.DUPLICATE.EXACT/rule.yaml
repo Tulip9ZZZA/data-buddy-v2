@@ -1,0 +1,14 @@
+# AUDIT.DUPLICATE.EXACT — records repeating every visible cell
+id: AUDIT.DUPLICATE.EXACT
+name: exact-duplicates
+version: 2.0.0
+title: Exact duplicate records found
+description: >
+  Detects rows whose full, order-insensitive key/value identity matches an
+  earlier row. Above the intake dedupe limit the rule runs in documented
+  sample mode and the finding is marked sampled: true.
+defaultSeverity: review
+repair: remove-exact-duplicates
+tags: [uniqueness]
+evidenceLimit: 10
+evidenceFields: [rowNumber, value, message]
